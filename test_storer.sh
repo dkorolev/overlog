@@ -9,37 +9,11 @@ TMPDIR=$(mktemp -d -u)
 echo -e "Working directory: \e[1;34m$TMPDIR\e[0m"
 
 DIFF="diff -c"
-BINARY="node lib/storer.js --verbose --storer_debug --storer_lockfile=$TMPDIR/lock"
-
-
-echo -n 'Does not start if the lock is acquired: '
-mkdir $TMPDIR
-touch $TMPDIR/lock
-echo | $BINARY >/dev/null 2>$TMPDIR/output.txt
-if ! grep EEXIST $TMPDIR/output.txt >/dev/null ; then
-    echo -e '\e[1;31mFAIL\e[0m'
-    exit 1
-fi
-echo -e '\e[1;32mOK\e[0m'
-rm -rf $TMPDIR
-
-
-echo -n 'Uses the lockfile: '
-mkdir $TMPDIR
-mkdir $TMPDIR-writable
-chmod -w $TMPDIR
-echo | $BINARY >/dev/null 2>$TMPDIR-writable/output.txt
-if ! grep EACCES $TMPDIR-writable/output.txt >/dev/null ; then
-    echo -e '\e[1;31mFAIL\e[0m'
-    exit 1
-fi
-echo -e '\e[1;32mOK\e[0m'
-rm -rf $TMPDIR-writable
-rm -rf $TMPDIR
+BINARY="node lib/storer.js --verbose --storer_debug --storer_workdir=$TMPDIR"
 
 
 echo -n 'Responds with INVALID_JSON: '
-mkdir $TMPDIR
+mkdir -p $TMPDIR
 cat >$TMPDIR/input.txt <<EOF
 This is not a valid JSON.
 EOF
@@ -53,7 +27,7 @@ rm -rf $TMPDIR
 
 
 echo -n 'Responds with NEED_MS_FIELD: '
-mkdir $TMPDIR
+mkdir -p $TMPDIR
 cat >$TMPDIR/input.txt <<EOF
 {"foo": "bar"}
 EOF
@@ -67,7 +41,7 @@ rm -rf $TMPDIR
 
 
 echo -n 'Responds with LARGE_TIME_DISCREPANCY: '
-mkdir $TMPDIR
+mkdir -p $TMPDIR
 cat >$TMPDIR/input.txt <<EOF
 {"ms":0}
 EOF
@@ -81,7 +55,7 @@ rm -rf $TMPDIR
 
 
 echo -n 'Writes an entry: '
-mkdir $TMPDIR
+mkdir -p $TMPDIR
 cat >$TMPDIR/input.txt <<EOF
 {"data": 42, "ms":0}
 EOF
@@ -102,8 +76,8 @@ rm -rf $TMPDIR
 
 
 echo -n 'Fails if intermediate directory can not be written into: '
-mkdir $TMPDIR
-mkdir $TMPDIR/intermediate
+mkdir -p $TMPDIR
+mkdir -p $TMPDIR/intermediate
 chmod -w $TMPDIR/intermediate
 cat >$TMPDIR/input.txt <<EOF
 {"ms":0}
@@ -121,8 +95,8 @@ rm -rf $TMPDIR
 
 
 echo -n 'Uses overridden intermediate directory: '
-mkdir $TMPDIR
-mkdir $TMPDIR/intermediate
+mkdir -p $TMPDIR
+mkdir -p $TMPDIR/intermediate
 chmod -w $TMPDIR/intermediate
 cat >$TMPDIR/input.txt <<EOF
 {"ms":0}
@@ -144,8 +118,8 @@ rm -rf $TMPDIR
 
 
 echo -n 'Fails if destination directory can not be written into: '
-mkdir $TMPDIR
-mkdir $TMPDIR/destination
+mkdir -p $TMPDIR
+mkdir -p $TMPDIR/destination
 chmod -w $TMPDIR/destination
 cat >$TMPDIR/input.txt <<EOF
 {"ms":0}
@@ -163,8 +137,8 @@ rm -rf $TMPDIR
 
 
 echo -n 'Uses overridden destination directory: '
-mkdir $TMPDIR
-mkdir $TMPDIR/destination
+mkdir -p $TMPDIR
+mkdir -p $TMPDIR/destination
 chmod -w $TMPDIR/destination
 cat >$TMPDIR/input.txt <<EOF
 {"ms":0}
@@ -186,7 +160,7 @@ rm -rf $TMPDIR
 
 
 echo -n 'Explicitly flushes: '
-mkdir $TMPDIR
+mkdir -p $TMPDIR
 cat >$TMPDIR/input.txt <<EOF
 {"ms":0,"data":"1foo"}
 FLUSH
@@ -209,7 +183,7 @@ echo -e '\e[1;32mOK\e[0m'
 rm -rf $TMPDIR
 
 echo -n 'Implicitly flushes by maximum number of entires per file: '
-mkdir $TMPDIR
+mkdir -p $TMPDIR
 cat >$TMPDIR/input.txt <<EOF
 {"ms":0,"data":"1foo1"}
 {"ms":0,"data":"2bar1"}
@@ -236,8 +210,8 @@ rm -rf $TMPDIR
 
 
 echo -n 'Replays pre-existing intermediate files on startup: '
-mkdir $TMPDIR
-mkdir $TMPDIR/intermediate
+mkdir -p $TMPDIR
+mkdir -p $TMPDIR/intermediate
 cat >$TMPDIR/intermediate/foo.txt <<EOF
 {"data":"foo1","ms":10001}
 {"data":"foo3","ms":10002}
@@ -270,7 +244,7 @@ rm -rf $TMPDIR
 
 
 echo -n 'Implicitly flushes because of the timeout (flaky, uses sleep): '
-mkdir $TMPDIR
+mkdir -p $TMPDIR
 cat >$TMPDIR/i1.txt <<EOF
 {"ms":0,"data":"foo"}
 EOF
