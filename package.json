@@ -1,0 +1,61 @@
+{
+   "name" : "overlog",
+   "version" : "0.0.1",
+   "description" : "Simple logs collection and retrieval.",
+   "homepage" : "https://github.com/dkorolev/overlog",
+   "repository" : {
+      "url" : "git@github.com:dkorolev/overlog.git",
+      "type" : "git"
+   },
+   "bugs" : {
+      "url" : "https://github.com/dkorolev/overlog/issues"
+   },
+   "engines" : {
+      "node" : ">= 0.8.x"
+   },
+   "author" : {
+      "email" : "dmitry.korolev@gmail.com",
+      "url" : "http://dimakorolev.com/",
+      "name" : "Dima Korolev"
+   },
+   "licenses" : [
+      {
+         "type" : "MIT"
+      }
+   ],
+   "license" : "MIT",
+   "tags" : [
+      "log",
+      "logging",
+      "collection",
+      "collecting",
+      "keep",
+      "keeper",
+      "keeping",
+      "storage",
+      "storing"
+   ],
+   "keywords" : [
+      "log",
+      "logging",
+      "collection",
+      "collecting",
+      "keep",
+      "keeper",
+      "keeping",
+      "storage",
+      "storing"
+   ],
+   "main" : "lib/storer.js",
+   "scripts": {
+       "test": "./test_storer.sh"
+   },
+   "dependencies" : {
+      "lockfile" : "*",
+      "commander" : "*",
+      "dateformat" : "*",
+      "semver" : "*",
+      "mkpath" : "*",
+      "underscore" : "*"
+   }
+}
