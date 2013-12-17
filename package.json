@@ -1,6 +1,6 @@
 {
    "name" : "overlog",
-   "version" : "0.0.3",
+   "version" : "0.0.4",
    "description" : "Simple logs collection and retrieval.",
    "homepage" : "https://github.com/dkorolev/overlog",
    "repository" : {
@@ -54,7 +54,6 @@
       "lockfile" : "*",
       "commander" : "*",
       "dateformat" : "*",
-      "semver" : "*",
       "mkpath" : "*",
       "underscore" : "*"
    }
