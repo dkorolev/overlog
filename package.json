@@ -55,6 +55,8 @@
       "commander" : "*",
       "dateformat" : "*",
       "mkpath" : "*",
+      "hound": "*",
+      "step": "*",
       "underscore" : "*"
    }
 }
