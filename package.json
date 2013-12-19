@@ -1,6 +1,6 @@
 {
    "name" : "overlog",
-   "version" : "0.0.6",
+   "version" : "0.0.7",
    "description" : "Simple logs collection and retrieval.",
    "homepage" : "https://github.com/dkorolev/overlog",
    "repository" : {
@@ -48,7 +48,7 @@
    ],
    "main" : "lib/storer.js",
    "scripts": {
-       "test": "./test_storer.sh"
+       "test": "./test_storer.sh && ./test_fetcher.sh"
    },
    "dependencies" : {
       "pidlock" : "*",
