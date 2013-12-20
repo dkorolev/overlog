@@ -1,4 +1,4 @@
-# overlog
+# overlog (node.js module)
 
 ## Motivation
 
@@ -9,7 +9,7 @@ An easy to use solution to store and fetch the logs.
 * Storer: ```push(entry)```
 * Fetcher: ```fetch(time_interval)```
 
-## Interface details
+## Interface Details
 
 Directory to store the files in will have to be provided.
 
