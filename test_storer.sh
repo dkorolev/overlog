@@ -77,13 +77,7 @@ echo -n 'Fails if intermediate directory can not be written into: '
 mkdir -p $TMPDIR
 mkdir -p $TMPDIR/intermediate
 chmod -w $TMPDIR/intermediate
-cat >$TMPDIR/input.txt <<EOF
-{"ms":0}
-EOF
-cat >$TMPDIR/golden.txt <<EOF
-{"ms":0}
-EOF
-cat $TMPDIR/input.txt | $BINARY --storer_max_time_discrepancy_ms=1e15 >/dev/null 2>$TMPDIR/output.txt
+echo '{"ms":0}' | $BINARY --storer_max_time_discrepancy_ms=1e15 >/dev/null 2>$TMPDIR/output.txt
 if ! grep EACCES $TMPDIR/output.txt >/dev/null ; then
     echo -e '\e[1;31mFAIL\e[0m'
     exit 1
@@ -119,13 +113,7 @@ echo -n 'Fails if destination directory can not be written into: '
 mkdir -p $TMPDIR
 mkdir -p $TMPDIR/destination
 chmod -w $TMPDIR/destination
-cat >$TMPDIR/input.txt <<EOF
-{"ms":0}
-EOF
-cat >$TMPDIR/golden.txt <<EOF
-{"ms":0}
-EOF
-cat $TMPDIR/input.txt | $BINARY --storer_max_time_discrepancy_ms=1e15 >/dev/null 2>$TMPDIR/output.txt
+echo '{"ms":0}' | $BINARY --storer_max_time_discrepancy_ms=1e15 >/dev/null 2>$TMPDIR/output.txt
 if ! grep EACCES $TMPDIR/output.txt >/dev/null ; then
     echo -e '\e[1;31mFAIL\e[0m'
     exit 1
