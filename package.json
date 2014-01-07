@@ -61,7 +61,6 @@
       "underscore": "*",
       "semaphore": "*",
       "faye": "*",
-      "express": "*",
-      "ringbufferjs": "*"
+      "express": "*"
    }
 }
