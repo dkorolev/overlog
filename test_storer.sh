@@ -190,7 +190,7 @@ cat >$TMPDIR/golden.txt <<EOF
 EOF
 cat >$TMPDIR/golden_output.txt <<EOF
 {"total_consumed":1,"total_replayed":0,"total_file_renames":0,"current_file":{"number_of_entries":1,"time_interval":{"earliest":0,"latest":0}}}
-{"total_consumed":1,"total_replayed":0,"total_file_renames":1,"current_file":{}}
+{"total_consumed":1,"total_replayed":0,"total_file_renames":1,"current_file":{"number_of_entries":0}}
 {"total_consumed":2,"total_replayed":0,"total_file_renames":1,"current_file":{"number_of_entries":1,"time_interval":{"earliest":1,"latest":1}}}
 EOF
 cat $TMPDIR/input.txt | $BINARY --storer_max_time_discrepancy_ms=1e15 >$TMPDIR/output.txt
