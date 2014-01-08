@@ -11,11 +11,17 @@ An easy to use solution to store and fetch the logs.
 * Fetcher: ```follow()``` mimics ```tail -f```.
 * Fetcher: ```fetch_and_follow()``` fetches entries from certain time range and goes into following mode afterwards.
 
-## Interface Details
+## Operation 
+
+Both storer and fetcher can be used via command line or via node.js bindings.
+
+Shell tests provide a good idea on basic usage and functionality.
 
 Directory to store the files has to be provided. Technically, two directories are required: one for intermediate files, append-only, and one for thefinalized files. They will be created as ```$DIR/intermediate/``` and ```$DIR/destination/``` as necessary.
 
-For storer's locking mechanism, either path to a lock file (directory and file) or PubSub channel name (and optional non-default port) is required as well.
+In PubSub mode, an HTTP status endpoint is being exposed as well. All it takes to use PubSub is to specify PubSub channel name, default values for other parameters would work.
+
+If not using PubSub For storer's locking mechanism, path to a lock file (via ```pidlock```, directory and file) is required as well.
 
 ## Implementation
 
@@ -42,6 +48,6 @@ node.js code performing these actions can be used directly as well.
 
 ## Bells and Whistles
 
-* With PubSub and a command-line tool.
+* With HTTP status endpoint, PubSub and a command-line tool.
 * Process-level locked.
 * Unit-tested through.
