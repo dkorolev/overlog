@@ -62,6 +62,7 @@
       "semaphore": "*",
       "faye": "*",
       "express": "*",
-      "restler": "*"
+      "restler": "*",
+      "json": "*"
    }
 }
