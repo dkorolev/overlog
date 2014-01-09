@@ -1,6 +1,6 @@
 {
    "name" : "overlog",
-   "version" : "0.1.4",
+   "version" : "0.1.5",
    "description" : "Simple logs collection and retrieval.",
    "homepage" : "https://github.com/dkorolev/overlog",
    "repository" : {
