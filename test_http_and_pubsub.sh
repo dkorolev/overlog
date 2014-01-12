@@ -68,7 +68,7 @@ echo -e '\e[1;32mOK\e[0m'
 
 
 echo -n 'Starting PubSub fetcher in background: '
-node lib/fetcher.js --follow  --fetcher_dir=$TMPDIR/destination/ --pubsub_port=$TEST_PORT --pubsub_channel=$CHANNEL >>$OUTPUT_FETCHER &
+node lib/fetcher.js --follow  --notify_before_following --fetcher_dir=$TMPDIR/destination/ --pubsub_port=$TEST_PORT --pubsub_channel=$CHANNEL >>$OUTPUT_FETCHER &
 FETCHER_PID=$!
 echo -e "\e[1;32mPID $FETCHER_PID\e[0m"
 
@@ -77,6 +77,7 @@ echo -n 'Waiting for the fetcher to start up and grab pending entries: '
 cat >$TMPDIR/golden.txt <<EOF
 {"ms":12001,"data":"first"}
 {"ms":12002,"data":"batch"}
+FOLLOWING
 EOF
 echo -n '.'
 while ! cat $OUTPUT_FETCHER | $DIFF - $TMPDIR/golden.txt >/dev/null ; do echo -n . ; sleep 0.2 ; done
@@ -118,6 +119,7 @@ echo -n 'Waiting for the fetcher to grab new entries via PubSub: '
 cat >$TMPDIR/golden.txt <<EOF
 {"ms":12001,"data":"first"}
 {"ms":12002,"data":"batch"}
+FOLLOWING
 {"ms":11001,"data":"second"}
 {"ms":11002,"data":"batch"}
 EOF
