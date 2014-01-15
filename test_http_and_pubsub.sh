@@ -35,7 +35,6 @@ echo -n 'Status page reflects a freshly started server: '
 if ! echo '{"total_consumed":0,"total_file_renames":0}' | $DIFF - <(curl -s localhost:$TEST_PORT/statusz | $JSON -u total_consumed total_file_renames) ; then
     echo -e '\e[1;31mFAIL\e[0m'
     echo STOP >> $STORER_PIPE
-    kill -INT $FETCHER_PID
     exit 1
 fi
 echo -e '\e[1;32mOK\e[0m'
@@ -51,7 +50,6 @@ echo -n 'Status page reflects newly added entries: '
 if ! echo '{"total_consumed":2,"total_file_renames":0}' | $DIFF - <(curl -s localhost:$TEST_PORT/statusz | $JSON -u total_consumed total_file_renames) ; then
     echo -e '\e[1;31mFAIL\e[0m'
     echo STOP >> $STORER_PIPE
-    kill -INT $FETCHER_PID
     exit 1
 fi
 echo -e '\e[1;32mOK\e[0m'
@@ -61,14 +59,30 @@ echo -n 'Pending entries page returns newly added uncommitted entries: '
 if ! echo '[{"ms":12001,"data":"first"},{"ms":12002,"data":"batch"}]' | $DIFF - <(curl -s localhost:$TEST_PORT/pending) ; then
     echo -e '\e[1;31mFAIL\e[0m'
     echo STOP >> $STORER_PIPE
-    kill -INT $FETCHER_PID
     exit 1
 fi
 echo -e '\e[1;32mOK\e[0m'
 
 
+echo -n 'Running non-following fetcher to view pending entries: '
+node lib/fetcher.js --since_ms 12002 --fetcher_dir=$TMPDIR/destination/ --pubsub_port=$TEST_PORT >$OUTPUT_FETCHER
+echo -e ' \e[1;32mOK\e[0m'
+
+
+echo -n 'Confirming pending entries match: '
+cat >$TMPDIR/golden.txt <<EOF
+{"ms":12002,"data":"batch"}
+EOF
+if ! cat $OUTPUT_FETCHER | $DIFF - $TMPDIR/golden.txt >/dev/null ; then
+    echo -e '\e[1;31mFAIL\e[0m'
+    echo STOP >> $STORER_PIPE
+    exit 1
+fi
+
+
 echo -n 'Starting PubSub fetcher in background: '
-node lib/fetcher.js --follow  --notify_before_following --fetcher_dir=$TMPDIR/destination/ --pubsub_port=$TEST_PORT --pubsub_channel=$CHANNEL >>$OUTPUT_FETCHER &
+rm -f $OUTPUT_FETCHER
+node lib/fetcher.js --follow --notify_before_following --fetcher_dir=$TMPDIR/destination/ --pubsub_port=$TEST_PORT --pubsub_channel=$CHANNEL >>$OUTPUT_FETCHER &
 FETCHER_PID=$!
 echo -e "\e[1;32mPID $FETCHER_PID\e[0m"
 
