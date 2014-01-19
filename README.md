@@ -21,7 +21,7 @@ Directory to store the files has to be provided. Technically, two directories ar
 
 In PubSub mode, an HTTP status endpoint is being exposed as well. All it takes to use PubSub is to specify PubSub channel name, default values for other parameters would work.
 
-If not using PubSub For storer's locking mechanism, path to a lock file (via ```pidlock```, directory and file) is required as well.
+If not using PubSub for storer's locking mechanism, path to a lock file (via ```pidlock```, directory and file) is required as well.
 
 ## Implementation
 
