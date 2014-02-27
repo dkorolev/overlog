@@ -4,10 +4,9 @@
 // cat all.txt | node lib/storer.js --storer_destination_dir=/somedir/resharded/ --storer_mock_time --storer_filename_dateformat=yyyy-mm-dd >/dev/null
 var lines = require('fs').readFileSync('/dev/stdin').toString().split('\n');
 for (var i in lines) {
-    var s = lines[i];
-    try {
-        var e = JSON.parse(s);
-        console.log(e.ms + '\t' + s);
-    } catch (e) {
-    }
+  var s = lines[i];
+  try {
+    var e = JSON.parse(s);
+    console.log(e.ms + '\t' + s);
+  } catch (e) {}
 }

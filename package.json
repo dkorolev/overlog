@@ -1,68 +1,66 @@
 {
-   "name" : "overlog",
-   "version" : "0.1.8",
-   "description" : "Simple logs collection and retrieval.",
-   "homepage" : "https://github.com/dkorolev/overlog",
-   "repository" : {
-      "url" : "git@github.com:dkorolev/overlog.git",
-      "type" : "git"
-   },
-   "bugs" : {
-      "url" : "https://github.com/dkorolev/overlog/issues"
-   },
-   "engines" : {
-      "node" : ">= 0.8.x"
-   },
-   "author" : {
-      "email" : "dmitry.korolev@gmail.com",
-      "url" : "http://dimakorolev.com/",
-      "name" : "Dima Korolev"
-   },
-   "licenses" : [
-      {
-         "type" : "MIT"
-      }
-   ],
-   "license" : "MIT",
-   "tags" : [
-      "log",
-      "logging",
-      "collection",
-      "collecting",
-      "keep",
-      "keeper",
-      "keeping",
-      "storage",
-      "storing"
-   ],
-   "keywords" : [
-      "log",
-      "logging",
-      "collection",
-      "collecting",
-      "keep",
-      "keeper",
-      "keeping",
-      "storage",
-      "storing"
-   ],
-   "main" : "lib/package.js",
-   "scripts": {
-       "test": "./test_storer.sh && ./test_fetcher.sh && ./test_http_and_pubsub.sh"
-   },
-   "dependencies" : {
-      "pidlock" : "*",
-      "commander" : "*",
-      "dateformat" : "*",
-      "mkpath" : "*",
-      "hound": "*",
-      "step": "*",
-      "synchronized": "*",
-      "underscore": "*",
-      "semaphore": "*",
-      "faye": "*",
-      "express": "*",
-      "restler": "*",
-      "json": "*"
-   }
+  "name": "overlog",
+  "version": "0.1.8",
+  "description": "Simple logs collection and retrieval.",
+  "homepage": "https://github.com/dkorolev/overlog",
+  "repository": {
+    "url": "git@github.com:dkorolev/overlog.git",
+    "type": "git"
+  },
+  "bugs": {
+    "url": "https://github.com/dkorolev/overlog/issues"
+  },
+  "engines": {
+    "node": ">= 0.8.x"
+  },
+  "author": {
+    "email": "dmitry.korolev@gmail.com",
+    "url": "http://dimakorolev.com/",
+    "name": "Dima Korolev"
+  },
+  "licenses": [{
+    "type": "MIT"
+  }],
+  "license": "MIT",
+  "tags": [
+    "log",
+    "logging",
+    "collection",
+    "collecting",
+    "keep",
+    "keeper",
+    "keeping",
+    "storage",
+    "storing"
+  ],
+  "keywords": [
+    "log",
+    "logging",
+    "collection",
+    "collecting",
+    "keep",
+    "keeper",
+    "keeping",
+    "storage",
+    "storing"
+  ],
+  "main": "lib/package.js",
+  "scripts": {
+    "test": "./test_storer.sh && ./test_fetcher.sh && ./test_http_and_pubsub.sh"
+  },
+  "dependencies": {
+    "pidlock": "*",
+    "commander": "*",
+    "dateformat": "*",
+    "mkpath": "*",
+    "hound": "*",
+    "step": "*",
+    "synchronized": "*",
+    "underscore": "*",
+    "semaphore": "*",
+    "faye": "*",
+    "express": "*",
+    "restler": "*",
+    "json": "*"
+  }
 }
